@@ -20,6 +20,7 @@ namespace Engine
             AgilityLevel = agility;
             LuckLevel = luck;
             Name = name;
+            
         }
         public int Level { get; set; }
         public int StrengthLevel { get; set; }
@@ -31,5 +32,27 @@ namespace Engine
         public int LuckLevel { get; set; }
         public string Name { get; set; }
 
+        public void defaultCharacter()
+        {
+            Level = 1;
+            StrengthLevel = 1;
+            PerceptionLevel = 1;
+            EnduranceLevel = 1;
+            CharismaLevel = 1;
+            IntelligenceLevel = 1;
+            AgilityLevel = 1;
+            LuckLevel = 1;
+            Name = "";
+
+        }
+        public void Save()
+        {
+            //Saves the stats to the database
+        }
+        public void Load()
+        {
+            //loads the stats and values to the variables from the database 
+           
+        }
     }
 }

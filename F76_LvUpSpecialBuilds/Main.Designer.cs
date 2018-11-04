@@ -170,6 +170,7 @@
             this.button_Save.TabIndex = 9;
             this.button_Save.Text = "Save";
             this.button_Save.UseVisualStyleBackColor = false;
+            this.button_Save.Click += new System.EventHandler(this.button_Save_Click);
             // 
             // button_CreateNew
             // 
@@ -199,6 +200,7 @@
             this.button_Load.TabIndex = 11;
             this.button_Load.Text = "Load";
             this.button_Load.UseVisualStyleBackColor = false;
+            this.button_Load.Click += new System.EventHandler(this.button_Load_Click);
             // 
             // button_Quit
             // 
@@ -561,6 +563,7 @@
             this.tb_Name.Name = "tb_Name";
             this.tb_Name.Size = new System.Drawing.Size(311, 38);
             this.tb_Name.TabIndex = 40;
+            this.tb_Name.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_Name_KeyPress);
             // 
             // Main
             // 

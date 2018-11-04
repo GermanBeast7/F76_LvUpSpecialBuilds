@@ -9,12 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Engine;
 
+
 namespace F76_LvUpSpecialBuilds
 {
     public partial class Main : Form
     {
 
         Character player = new Character(1, 1, 1, 1, 1, 1, 1, 1,"");
+        List<Character> savedPlayers;
+        
 
         public Main()
         {
@@ -22,6 +25,7 @@ namespace F76_LvUpSpecialBuilds
         }
         private void UpdateUI()
         {
+            tb_Name.Text = player.Name;
             label_LevelNumber.Text = player.Level.ToString();
             label_SNum.Text = player.StrengthLevel.ToString();
             label_PNum.Text = player.PerceptionLevel.ToString();
@@ -31,6 +35,7 @@ namespace F76_LvUpSpecialBuilds
             label_ANum.Text = player.AgilityLevel.ToString();
             label_LNum.Text = player.LuckLevel.ToString();
 
+            
             if (player.Level == 50){
                 btn_AddS.Visible = false;
                 btn_AddP.Visible = false;
@@ -71,6 +76,13 @@ namespace F76_LvUpSpecialBuilds
         {
             Application.Exit();
         }
+
+        private void tb_Name_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            player.Name = tb_Name.Text.ToString();
+            UpdateUI();
+        }
+
 
         private void btn_AddS_Click(object sender, EventArgs e)
         {
@@ -216,7 +228,19 @@ namespace F76_LvUpSpecialBuilds
 
         private void button_CreateNew_Click(object sender, EventArgs e)
         {
-            player = new Character(1, 1, 1, 1, 1, 1, 1, 1,"");
+            player.defaultCharacter();
+            UpdateUI();
+        }
+
+        private void button_Save_Click(object sender, EventArgs e)
+        {
+            player.Save();
+            UpdateUI();
+        }
+
+        private void button_Load_Click(object sender, EventArgs e)
+        {
+            player.Load();
             UpdateUI();
         }
     }
