@@ -541,7 +541,7 @@
             this.tb_Name.Font = new System.Drawing.Font("Myanmar Text", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_Name.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(242)))), ((int)(((byte)(101)))));
             this.tb_Name.Location = new System.Drawing.Point(484, 26);
-            this.tb_Name.MaxLength = 100;
+            this.tb_Name.MaxLength = 18;
             this.tb_Name.Name = "tb_Name";
             this.tb_Name.Size = new System.Drawing.Size(311, 38);
             this.tb_Name.TabIndex = 40;
