@@ -7,22 +7,51 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Engine;
+using System.IO;
+using System.Xml;
 
+using Engine;
+using System.Xml.Serialization;
 
 namespace F76_LvUpSpecialBuilds
 {
     public partial class Main : Form
     {
-
-        Character player = new Character(1, 1, 1, 1, 1, 1, 1, 1,"");
-        List<Character> savedPlayers;
+       
+        const string savedPath = "savedCharacters";
+        Character player = new Character();
+        List<string> savedPlayers = loadList();
+       
+       
         
+        
+        private void cbUpdate()
+        {
+
+            cb_Characters.Items.Clear();
+            cb_Characters.Items.AddRange(savedPlayers.ToArray());
+            
+        }
+        private static List<string> loadList()
+        {
+            try
+            {
+                return DeSerializeObject<List<string>>(savedPath);
+            }
+            catch
+            {
+                return new List<string>();
+            }
+            
+        }
 
         public Main()
         {
             InitializeComponent();
+            cbUpdate();
         }
+
+       
         private void UpdateUI()
         {
             tb_Name.Text = player.Name;
@@ -35,8 +64,27 @@ namespace F76_LvUpSpecialBuilds
             label_ANum.Text = player.AgilityLevel.ToString();
             label_LNum.Text = player.LuckLevel.ToString();
 
-            
-            if (player.Level == 50){
+            //Shows the appropriate buttons for what butttons are available, only allowing each stat to be 1 to 15
+            if(player.StrengthLevel != 15) { btn_AddS.Visible = true; } else { btn_AddS.Visible = false; }
+            if (player.PerceptionLevel != 15) { btn_AddP.Visible = true; } else { btn_AddP.Visible = false; }
+            if (player.EnduranceLevel != 15) { btn_AddE.Visible = true; } else { btn_AddE.Visible = false; }
+            if (player.CharismaLevel != 15) { btn_AddC.Visible = true; } else { btn_AddC.Visible = false; }
+            if (player.IntelligenceLevel != 15) { btn_AddI.Visible = true; } else { btn_AddI.Visible = false; }
+            if (player.AgilityLevel != 15) { btn_AddA.Visible = true; } else { btn_AddA.Visible = false; }
+            if (player.LuckLevel != 15) { btn_AddL.Visible = true; } else { btn_AddL.Visible = false; }
+
+            //
+            if (player.StrengthLevel != 1) { btn_SubS.Visible = true; } else { btn_SubS.Visible = false; }
+            if (player.PerceptionLevel != 1) { btn_SubP.Visible = true; } else { btn_SubP.Visible = false; }
+            if (player.EnduranceLevel != 1) { btn_SubE.Visible = true; } else { btn_SubE.Visible = false; }
+            if (player.CharismaLevel != 1) { btn_SubC.Visible = true; } else { btn_SubC.Visible = false; }
+            if (player.IntelligenceLevel != 1) { btn_SubI.Visible = true; } else { btn_SubI.Visible = false; }
+            if (player.AgilityLevel != 1) { btn_SubA.Visible = true; } else { btn_SubA.Visible = false; }
+            if (player.LuckLevel != 1) { btn_SubL.Visible = true; } else { btn_SubL.Visible = false; }
+
+            //Does not enable increasing stats past level 50
+            if (player.Level == 50)
+            {
                 btn_AddS.Visible = false;
                 btn_AddP.Visible = false;
                 btn_AddE.Visible = false;
@@ -45,36 +93,27 @@ namespace F76_LvUpSpecialBuilds
                 btn_AddA.Visible = false;
                 btn_AddL.Visible = false;
             }
-            else
-            {
-                if(player.StrengthLevel != 15) { btn_AddS.Visible = true; } else { btn_AddS.Visible = false; }
-                if (player.PerceptionLevel != 15) { btn_AddP.Visible = true; } else { btn_AddP.Visible = false; }
-                if (player.EnduranceLevel != 15) { btn_AddE.Visible = true; } else { btn_AddE.Visible = false; }
-                if (player.CharismaLevel != 15) { btn_AddC.Visible = true; } else { btn_AddC.Visible = false; }
-                if (player.IntelligenceLevel != 15) { btn_AddI.Visible = true; } else { btn_AddI.Visible = false; }
-                if (player.AgilityLevel != 15) { btn_AddA.Visible = true; } else { btn_AddA.Visible = false; }
-                if (player.LuckLevel != 15) { btn_AddL.Visible = true; } else { btn_AddL.Visible = false; }
 
-                if (player.StrengthLevel != 1) { btn_SubS.Visible = true; } else { btn_SubS.Visible = false; }
-                if (player.PerceptionLevel != 1) { btn_SubP.Visible = true; } else { btn_SubP.Visible = false; }
-                if (player.EnduranceLevel != 1) { btn_SubE.Visible = true; } else { btn_SubE.Visible = false; }
-                if (player.CharismaLevel != 1) { btn_SubC.Visible = true; } else { btn_SubC.Visible = false; }
-                if (player.IntelligenceLevel != 1) { btn_SubI.Visible = true; } else { btn_SubI.Visible = false; }
-                if (player.AgilityLevel != 1) { btn_SubA.Visible = true; } else { btn_SubA.Visible = false; }
-                if (player.LuckLevel != 1) { btn_SubL.Visible = true; } else { btn_SubL.Visible = false; }
-            }
-            
 
 
         }
         private void Main_Load(object sender, System.EventArgs e)
         {
-
+            cbUpdate();
         }
 
         private void button_Quit_Click(object sender, System.EventArgs e)
         {
-            Application.Exit();
+            try
+            {
+                SerializeObject<List<string>>(savedPlayers,savedPath);
+            }
+            catch
+            {
+
+            }
+              
+              Application.Exit();
         }
 
         private void tb_Name_KeyPress(object sender, KeyPressEventArgs e)
@@ -83,7 +122,11 @@ namespace F76_LvUpSpecialBuilds
             UpdateUI();
         }
 
-
+        private void tb_Name_TextChanged(object sender, EventArgs e)
+        {
+            player.Name = tb_Name.Text.ToString();
+            UpdateUI();
+        }
         private void btn_AddS_Click(object sender, EventArgs e)
         {
 
@@ -228,20 +271,119 @@ namespace F76_LvUpSpecialBuilds
 
         private void button_CreateNew_Click(object sender, EventArgs e)
         {
-            player.defaultCharacter();
+
+            player = new Character();
             UpdateUI();
         }
 
         private void button_Save_Click(object sender, EventArgs e)
         {
-            player.Save();
-            UpdateUI();
+            if ((player.Name != savedPath)&&(player.Name.Trim(' ') != ""))
+            {
+               if (!savedPlayers.Contains(player.Name))
+                {
+                    savedPlayers.Add(player.Name);
+                }
+                   
+                
+                
+
+                cbUpdate();
+
+                try
+                { 
+                   SerializeObject<Character>(player, player.Name);
+                  
+                }
+                catch
+                {
+
+                }
+            }
+            
         }
 
         private void button_Load_Click(object sender, EventArgs e)
         {
-            player.Load();
-            UpdateUI();
+            try
+            {
+                player = DeSerializeObject<Character>(cb_Characters.SelectedItem.ToString());
+                UpdateUI();
+            }
+            catch
+            {
+
+            }
+            
         }
+
+        private void btn_delete_Click(object sender, EventArgs e)
+        {
+            
+            try
+            {
+                savedPlayers.Remove(cb_Characters.SelectedItem.ToString());
+                File.Delete(cb_Characters.SelectedItem.ToString());
+                cbUpdate();
+                cb_Characters.Text = "";
+            }
+            catch
+            {
+
+            }
+            
+
+        }
+
+       
+        public static void SerializeObject<T>(T serializableObject, string fileName)
+        {
+            if (serializableObject == null) { return; }
+
+           
+                XmlDocument xmlDocument = new XmlDocument();
+                XmlSerializer serializer = new XmlSerializer(serializableObject.GetType());
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    serializer.Serialize(stream, serializableObject);
+                    stream.Position = 0;
+                    xmlDocument.Load(stream);
+                    xmlDocument.Save(fileName);
+                }
+            
+           
+        }
+
+
+        
+        public static T DeSerializeObject<T>(string fileName)
+        {
+            if (string.IsNullOrEmpty(fileName)) { return default(T); }
+
+            T objectOut = default(T);
+
+            
+                XmlDocument xmlDocument = new XmlDocument();
+                xmlDocument.Load(fileName);
+                string xmlString = xmlDocument.OuterXml;
+
+                using (StringReader read = new StringReader(xmlString))
+                {
+                    Type outType = typeof(T);
+
+                    XmlSerializer serializer = new XmlSerializer(outType);
+                    using (XmlReader reader = new XmlTextReader(read))
+                    {
+                        objectOut = (T)serializer.Deserialize(reader);
+                    }
+                }
+            
+            
+
+            return objectOut;
+        }
+
+
+
     }
 }

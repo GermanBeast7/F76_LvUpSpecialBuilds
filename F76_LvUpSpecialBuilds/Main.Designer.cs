@@ -41,7 +41,6 @@
             this.button_CreateNew = new System.Windows.Forms.Button();
             this.button_Load = new System.Windows.Forms.Button();
             this.button_Quit = new System.Windows.Forms.Button();
-            this.dgv_Player = new System.Windows.Forms.DataGridView();
             this.label_SNum = new System.Windows.Forms.Label();
             this.label_PNum = new System.Windows.Forms.Label();
             this.label_ENum = new System.Windows.Forms.Label();
@@ -66,7 +65,9 @@
             this.label_CNum = new System.Windows.Forms.Label();
             this.label_name = new System.Windows.Forms.Label();
             this.tb_Name = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_Player)).BeginInit();
+            this.cb_Characters = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btn_delete = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Label_Level
@@ -216,25 +217,6 @@
             this.button_Quit.Text = "Quit";
             this.button_Quit.UseVisualStyleBackColor = false;
             this.button_Quit.Click += new System.EventHandler(this.button_Quit_Click);
-            // 
-            // dgv_Player
-            // 
-            this.dgv_Player.AllowUserToAddRows = false;
-            this.dgv_Player.AllowUserToDeleteRows = false;
-            this.dgv_Player.AllowUserToResizeColumns = false;
-            this.dgv_Player.AllowUserToResizeRows = false;
-            this.dgv_Player.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(122)))), ((int)(((byte)(185)))));
-            this.dgv_Player.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_Player.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgv_Player.Enabled = false;
-            this.dgv_Player.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(167)))), ((int)(((byte)(214)))));
-            this.dgv_Player.Location = new System.Drawing.Point(12, 12);
-            this.dgv_Player.MultiSelect = false;
-            this.dgv_Player.Name = "dgv_Player";
-            this.dgv_Player.ReadOnly = true;
-            this.dgv_Player.RowTemplate.Height = 28;
-            this.dgv_Player.Size = new System.Drawing.Size(350, 550);
-            this.dgv_Player.TabIndex = 13;
             // 
             // label_SNum
             // 
@@ -563,7 +545,45 @@
             this.tb_Name.Name = "tb_Name";
             this.tb_Name.Size = new System.Drawing.Size(311, 38);
             this.tb_Name.TabIndex = 40;
+            this.tb_Name.TextChanged += new System.EventHandler(this.tb_Name_TextChanged);
             this.tb_Name.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_Name_KeyPress);
+            // 
+            // cb_Characters
+            // 
+            this.cb_Characters.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(122)))), ((int)(((byte)(185)))));
+            this.cb_Characters.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cb_Characters.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(242)))), ((int)(((byte)(101)))));
+            this.cb_Characters.FormattingEnabled = true;
+            this.cb_Characters.Location = new System.Drawing.Point(12, 100);
+            this.cb_Characters.Name = "cb_Characters";
+            this.cb_Characters.Size = new System.Drawing.Size(307, 37);
+            this.cb_Characters.TabIndex = 41;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Myanmar Text", 14F, System.Drawing.FontStyle.Bold);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(242)))), ((int)(((byte)(101)))));
+            this.label1.Location = new System.Drawing.Point(-8, 55);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(381, 50);
+            this.label1.TabIndex = 42;
+            this.label1.Text = "Character to load or delete:";
+            // 
+            // btn_delete
+            // 
+            this.btn_delete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(122)))), ((int)(((byte)(185)))));
+            this.btn_delete.FlatAppearance.BorderSize = 0;
+            this.btn_delete.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_delete.Font = new System.Drawing.Font("Myanmar Text", 12F, System.Drawing.FontStyle.Bold);
+            this.btn_delete.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(232)))), ((int)(((byte)(164)))));
+            this.btn_delete.Location = new System.Drawing.Point(57, 298);
+            this.btn_delete.Name = "btn_delete";
+            this.btn_delete.Size = new System.Drawing.Size(193, 55);
+            this.btn_delete.TabIndex = 43;
+            this.btn_delete.Text = "Delete";
+            this.btn_delete.UseVisualStyleBackColor = false;
+            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
             // 
             // Main
             // 
@@ -572,6 +592,9 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(88)))), ((int)(((byte)(134)))));
             this.ClientSize = new System.Drawing.Size(878, 844);
+            this.Controls.Add(this.btn_delete);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cb_Characters);
             this.Controls.Add(this.tb_Name);
             this.Controls.Add(this.label_name);
             this.Controls.Add(this.btn_SubC);
@@ -596,7 +619,6 @@
             this.Controls.Add(this.label_ENum);
             this.Controls.Add(this.label_PNum);
             this.Controls.Add(this.label_SNum);
-            this.Controls.Add(this.dgv_Player);
             this.Controls.Add(this.button_Quit);
             this.Controls.Add(this.button_Load);
             this.Controls.Add(this.button_CreateNew);
@@ -614,7 +636,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Build Creator";
             this.Load += new System.EventHandler(this.Main_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_Player)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -635,7 +656,6 @@
         private System.Windows.Forms.Button button_CreateNew;
         private System.Windows.Forms.Button button_Load;
         private System.Windows.Forms.Button button_Quit;
-        private System.Windows.Forms.DataGridView dgv_Player;
         private System.Windows.Forms.Label label_SNum;
         private System.Windows.Forms.Label label_PNum;
         private System.Windows.Forms.Label label_ENum;
@@ -661,6 +681,9 @@
         private System.Windows.Forms.Label label_CNum;
         private System.Windows.Forms.Label label_name;
         private System.Windows.Forms.TextBox tb_Name;
+        private System.Windows.Forms.ComboBox cb_Characters;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btn_delete;
     }
 }
 
