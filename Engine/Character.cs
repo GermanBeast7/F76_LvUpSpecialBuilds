@@ -38,20 +38,125 @@ namespace Engine
             Name = name;
 
         }
+        // Only public attributes so they can be serialized by XMl Serialization
+        // Main.cs uses the methods below to mutate and get values of an object of this class
+        public int Level;
+        public int StrengthLevel;
+        public int PerceptionLevel;
+        public int EnduranceLevel;
+        public int CharismaLevel;
+        public int IntelligenceLevel;
+        public int AgilityLevel;
+        public int LuckLevel;
+        public string Name;
+        
+       //Methods to mutate or to get values of the class
+       public void addLevel()
+        {
+            Level += 1;
+        }
+        public void subLevel()
+        {
+            Level -= 1;
+        }
+        public int getLevel()
+        {
+            return Level;
+        }
+        public void addStr()
+        {
+            StrengthLevel += 1;
+        }
+        public void subStr()
+        {
+            StrengthLevel -= 1;
+        }
+        public int getStr()
+        {
+            return StrengthLevel;
+        }
+        public void addPer()
+        {
+            PerceptionLevel += 1;
+        }
+        public void subPer()
+        {
+            PerceptionLevel -= 1;
+        }
+        public int getPer()
+        {
+            return PerceptionLevel;
+        }
+        public void addEnd()
+        {
+            EnduranceLevel += 1;
+        }
+        public void subEnd()
+        {
+            EnduranceLevel -= 1;
+        }
+        public int getEnd()
+        {
+            return EnduranceLevel;
+        }
+        public void addCha()
+        {
+            CharismaLevel += 1;
+        }
+        public void subCha()
+        {
+            CharismaLevel -= 1;
+        }
+        public int getCha()
+        {
+            return CharismaLevel;
+        }
+        public void addInt()
+        {
+            IntelligenceLevel += 1;
+        }
+        public void subInt()
+        {
+            IntelligenceLevel -= 1;
+        }
+        public int getInt()
+        {
+            return IntelligenceLevel;
+        }
+        public void addAgi()
+        {
+            AgilityLevel += 1;
+        }
+        public void subAgi()
+        {
+            AgilityLevel -= 1;
+        }
+        public int getAgi()
+        {
+            return AgilityLevel;
+        }
+        public void addLuc()
+        {
+            LuckLevel += 1;
+        }
+        public void subLuc()
+        {
+            LuckLevel -= 1;
+        }
+        public int getLuc()
+        {
+            return LuckLevel;
+        }
+        public void changeName(string name)
+        {
+            Name = name;
+        }
+        public string getName()
+        {
+            return Name;
+        }
 
-        public int Level { get; set; }
-        public int StrengthLevel { get; set; }
-        public int PerceptionLevel { get; set; }
-        public int EnduranceLevel { get; set; }
-        public int CharismaLevel { get; set; }
-        public int IntelligenceLevel { get; set; }
-        public int AgilityLevel { get; set; }
-        public int LuckLevel { get; set; }
-        public string Name { get; set; }
-        
-       
-      
-        
+
 
     }
 }
